@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Emergency Alert</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,400;0,9..40,600;0,9..40,700;1,9..40,400&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}" />
+</head>
+<body>
+  <div class="bg-grid"></div>
+  <main class="shell">
+    <header class="top">
+      <div class="brand">
+        <span class="brand-mark" aria-hidden="true"></span>
+        <div>
+          <h1>Emergency Alert</h1>
+          <p class="tagline">Step 1: allow camera &amp; location · Step 2: send alert (or say “help”)</p>
+        </div>
+      </div>
+      <div class="pills" role="group" aria-label="Notification channels">
+        <div id="smtp-pill" class="pill pill-warn" role="status">Email: …</div>
+        <div id="twilio-pill" class="pill pill-warn" role="status">SMS: …</div>
+        <div id="wa-pill" class="pill pill-warn" role="status">WhatsApp: …</div>
+      </div>
+    </header>
+
+    <section class="panel preview-panel">
+      <div class="preview-wrap">
+        <video id="video" playsinline autoplay muted></video>
+        <canvas id="canvas" hidden></canvas>
+        <div id="preview-overlay" class="preview-overlay">
+          <span id="cam-hint">Tap the red button below to allow camera and location</span>
+        </div>
+      </div>
+      <div class="side">
+        <div class="stat">
+          <span class="stat-label">Location</span>
+          <span id="loc-text" class="stat-value">Requesting…</span>
+        </div>
+        <div class="stat">
+          <span class="stat-label">Voice keyword</span>
+          <span id="voice-state" class="stat-value">Off</span>
+        </div>
+        <button type="button" id="btn-voice" class="btn btn-ghost" disabled title="Available after step 1">
+          Enable “help” voice
+        </button>
+      </div>
+    </section>
+
+    <section class="msg-section">
+      <label class="msg-label" for="emergency-msg">Emergency message (sent in email &amp; SMS/WhatsApp)</label>
+      <textarea
+        id="emergency-msg"
+        class="msg-textarea"
+        rows="2"
+        maxlength="600"
+        placeholder="Short message to your contacts…"
+      >I need help — this is an automated emergency alert.</textarea>
+    </section>
+
+    <section class="actions">
+      <button type="button" id="btn-emergency" class="btn btn-emergency">
+        <span class="btn-emergency-inner">
+          <span class="pulse" aria-hidden="true"></span>
+          <span id="btn-emergency-label">① Allow camera &amp; location</span>
+        </span>
+      </button>
+      <p id="status-line" class="status-line" role="status"></p>
+    </section>
+
+    <footer class="foot">
+      <p>
+        <strong>Your email:</strong> create <code>.env</code> from <code>.env.example</code> and set
+        <code>SMTP_SENDER</code> (your Gmail), <code>SMTP_APP_PASSWORD</code> (Gmail App Password),
+        and <code>SMTP_RECEIVER</code> (who gets the alert). Add Twilio for SMS or WhatsApp — see
+        <code>.env.example</code>.
+      </p>
+    </footer>
+  </main>
+  <script src="{{ url_for('static', filename='js/app.js') }}"></script>
+</body>
+</html>

@@ -1,0 +1,11 @@
+.env
+models/
+token.pickle
+*.jpg
+*.jpeg
+*.png
+__pycache__/
+.venv/
+venv/
+*.pyc
+.DS_Store
