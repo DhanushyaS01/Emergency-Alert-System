@@ -335,4 +335,4 @@ def api_emergency():
 
 if __name__ == "__main__":
     # Use 127.0.0.1 for local testing; allow camera APIs on localhost in modern browsers.
-    app.run(host="127.0.0.1", port=5000, debug=True)
+   app.run(host="0.0.0.0", port=5000)
